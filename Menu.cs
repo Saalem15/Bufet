@@ -9,26 +9,26 @@ namespace Gierka
 {
     public class Menu : IState
     {
+        public void HandleInput(char input)
+        {
+            switch(input)
+            {
+                case 'q': ExitMenu();
+                    break;
+                case 'w': StartGame();
+                    break;
+            }
+        }
+        void ExitMenu()
+        {
+            
+        }
+        void StartGame()
+        {
+
+        }
     
 
-        public void InputQ()
-        {
-            Console.WriteLine("Exit");
-        }
 
-        public void InputW()
-        {
-            Console.WriteLine("Start");
-        }
-
-        public void InputE()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void InputR()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Gierka
 {
-    internal class GameState
+    internal class GameState : IState
     {
+        public void HandleInput(char input)
+        {
+            
+        }
     }
 }

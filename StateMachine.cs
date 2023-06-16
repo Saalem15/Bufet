@@ -8,5 +8,11 @@ namespace Gierka
 {
     internal class StateMachine
     {
+        public void ProcessState()
+        {
+             
+        }
+
+
     }
 }

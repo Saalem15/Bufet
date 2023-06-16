@@ -7,9 +7,9 @@ namespace Gierka
     {
         static void Main()
         {
+            public bool isTurnedOn = true;
             
-            Console.WriteLine("Hello, World!");
-            ConsoleKeyInfo dupcia = Console.ReadKey();
+            
           
 
 
