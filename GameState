@@ -1,7 +1,0 @@
-    class GameState : IState
-    {
-        public void HandleInput(char input)
-        {
-            
-        }
-    }
