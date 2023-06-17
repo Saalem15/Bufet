@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Gierka
 {
-    public interface IGameState
+    public class Armor : Equipment
     {
-        bool Process();
-  
+        public int HealthBoost { get; set; }
     }
 }

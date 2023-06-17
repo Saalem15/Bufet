@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Gierka
 {
-    public interface IGameState
+    public abstract class Equipment
     {
-        bool Process();
-  
+        public string Name { get; set; }
     }
 }

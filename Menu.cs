@@ -7,27 +7,105 @@ using System.Threading.Tasks;
 
 namespace Gierka
 {
-    public class Menu : IState
+    public class MenuState : IGameState
     {
-        public void HandleInput(char input)
+        private StateMachine stateMachine;
+        public MenuState(StateMachine stateMachine)
         {
-            switch(input)
+            this.stateMachine = stateMachine;
+        }
+
+        public bool Process()
+        {
+            bool selectedOption = false;
+            while (selectedOption is false)
             {
-                case 'q': ExitMenu();
-                    break;
-                case 'w': StartGame();
-                    break;
+                Console.WriteLine("1. Walka");
+                Console.WriteLine("2. Gadanie");
+                Console.WriteLine("3. Sklep");
+                Console.WriteLine("4. Plecak/EQ");
+                Console.WriteLine("5. Chleb");
+                Console.WriteLine("9. Wyłącz Gre");
+                Console.WriteLine();
+
+                var pressedKey = Console.ReadKey();
+                switch (pressedKey.KeyChar)
+                {
+                    case '1':
+                        //fight
+                        selectedOption = ChooseMonster();
+                        break;
+                    case '2':
+                        //talk
+                        stateMachine.ChangeState(new TalkState(stateMachine));
+                        selectedOption = true;
+                        break;
+                    case '3':
+                        //shop
+                        stateMachine.ChangeState(new ShopState(stateMachine));
+                        selectedOption = true;
+                        break;
+                    case '4':
+                        //eq
+                        stateMachine.ChangeState(new EqState(stateMachine));
+                        selectedOption = true;
+                        break;
+                    case '5':
+                        //bread
+                        stateMachine.ChangeState(new BreadState(stateMachine));
+                        selectedOption = true;
+                        break;
+                    case '9':
+                        //Exit
+                        return false;
+                    default:
+                        Console.WriteLine("Niepoprawna Komenda");
+                        break;
+
+
+
+                }
+
             }
-        }
-        void ExitMenu()
-        {
-            
-        }
-        void StartGame()
-        {
+            return true;
+
 
         }
-    
+
+        private bool ChooseMonster()
+        {
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("Wybierz potwora, z którym chcesz walczyć:");
+            Console.WriteLine("1. Goblin");
+            Console.WriteLine("2. Troll");
+            Console.WriteLine("3. Ork");
+            Console.WriteLine();
+
+            var pressedKey = Console.ReadKey();
+            switch (pressedKey.KeyChar)
+            {
+                case '1':
+                    // Walka z goblinem
+                    stateMachine.ChangeState(new FightState(stateMachine, "Goblin"));
+                    return true;
+                case '2':
+                    // Walka z trollem
+                    stateMachine.ChangeState(new FightState(stateMachine, "Troll"));
+                    return true;
+                case '3':
+                    // Walka z orkiem
+                    stateMachine.ChangeState(new FightState(stateMachine, "Ork"));
+                    return true;
+                default:
+                    Console.WriteLine("Niepoprawna Komenda");
+                    return false;
+            }
+        }
+
+
+
+
 
 
     }

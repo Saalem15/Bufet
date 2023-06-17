@@ -7,7 +7,12 @@ namespace Gierka
     {
         static void Main()
         {
-            public bool isTurnedOn = true;
+            var stateMachine = new StateMachine();
+            while (stateMachine.Run())
+            {
+
+            }
+            
             
             
           
