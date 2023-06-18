@@ -8,7 +8,7 @@ namespace Gierka
 {
     public class Orc : Character
     {
-        public Orc() : base("Orc", 90, 30)
+        public Orc() : base("Ork", 90, 30)
         {
         }
     }

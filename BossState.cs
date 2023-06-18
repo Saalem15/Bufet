@@ -19,6 +19,23 @@ namespace Gierka
         {
             if(stateMachine.MyQuest.IsCompleted)
             {
+                Console.WriteLine("Widzisz smoka, czy chcesz go zaatakować?");
+                Console.WriteLine("1. Tak");
+                Console.WriteLine("2. Nie");
+                var key = Console.ReadKey();
+                if (key.KeyChar == '1')
+                {
+                    stateMachine.ChangeState(new FightState(stateMachine, "Dragon"));
+                }
+                else if (key.KeyChar == '2')
+                {
+                    stateMachine.ChangeState(new MenuState(stateMachine));
+                }
+                else
+                {
+                    Console.WriteLine("Błąd");  
+                }
+
                 return true;
             }
             else

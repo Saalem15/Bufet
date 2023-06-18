@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Gierka
@@ -73,8 +74,19 @@ namespace Gierka
                             stateMachine.Player.Health = stateMachine.Player.BaseHealth;
                         }
                         stateMachine.Player.Potions -= 1;
+                        Console.WriteLine();
+                        Console.WriteLine($"Użyłeś mikstury. Masz {stateMachine.Player.Health} punktów życia.");
+                        Console.WriteLine();
+                        continue;
                     }
-                 
+                    else
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine();
+                        Console.WriteLine("Nie masz żadnych Mikstur");
+                        continue;
+                    }
+                        
                 }
 
                 if (monster.Health <= 0)
@@ -103,6 +115,11 @@ namespace Gierka
                             Console.WriteLine("Otrzymałeś 30 złota");
                             Console.WriteLine();
                             break;
+                        case "Smok":
+                            Console.WriteLine();
+                            Console.WriteLine("Gratulacje, wygrałeś!");
+                            Console.WriteLine();
+                            return false;
                         default:
                             throw new ArgumentException($"Nieznany typ potwora: {monster.Name}");
                     }

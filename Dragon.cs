@@ -8,7 +8,7 @@ namespace Gierka
 {
     public class Dragon : Character
     {
-        public Dragon() : base("Dragon", 100, 40)
+        public Dragon() : base("Smok", 100, 40)
         {
         }
     }

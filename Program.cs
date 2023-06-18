@@ -11,14 +11,7 @@ namespace Gierka
             while (stateMachine.Run())
             {
 
-            }
-            
-            
-            
-          
-
-
-            
+            }   
         }
     }
 }

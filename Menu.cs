@@ -51,7 +51,7 @@ namespace Gierka
                         selectedOption = true;
                         break;
                     case '5':
-                        //bread
+                        //boss
                         stateMachine.ChangeState(new BossState(stateMachine));
                         selectedOption = true;
                         break;

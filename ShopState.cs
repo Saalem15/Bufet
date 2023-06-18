@@ -38,8 +38,9 @@ namespace Gierka
             Console.WriteLine("Witaj w sklepie!");
             Console.WriteLine("1. Kup zbroję");
             Console.WriteLine("2. Kup broń");
-            Console.WriteLine("3. Kup miksturę zdrowia");
+            Console.WriteLine("3. Kup miksturę zdrowia. Cena: 50");
             Console.WriteLine("4. Wróć do menu");
+            Console.WriteLine();
 
             var choice = Console.ReadKey();
 
@@ -137,6 +138,9 @@ namespace Gierka
             {
                 stateMachine.Player.Gold -= 50;
                 stateMachine.Player.Potions += 1;
+                Console.WriteLine();
+                Console.WriteLine("Kupiłeś Miksture.");
+                Console.WriteLine();
             }
             else
             {
