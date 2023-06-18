@@ -9,5 +9,11 @@ namespace Gierka
     public class Weapon : Equipment
     {
         public int AttackBoost { get; set; }
+        public Weapon(string name, int ab, int price)
+        {
+            Name = name;
+            AttackBoost = ab;
+            Price = price;
+        }
     }
 }

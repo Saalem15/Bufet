@@ -9,12 +9,16 @@ namespace Gierka
     public class StateMachine
     {
         private IGameState currentState;
-        public Character Player { get; private set; }
+        public Player Player { get; private set; }
 
         public StateMachine()
         {
             // Inicjalizujemy postać gracza z podstawowymi statystykami
-            Player = new Character("Gracz", 100, 20); // Możesz zmienić te wartości na takie, które są odpowiednie dla Twojej gry
+            Player = new Player("Gracz", 100, 20); // Możesz zmienić te wartości na takie, które są odpowiednie dla Twojej gry
+            Armor shirt = new Armor("Koszula", 0, 0);
+            Weapon stick = new Weapon("Patyk", 0, 0);
+            Player.EquipArmor(shirt);
+            Player.EquipWeapon(stick);
 
             // Ustawiamy początkowy stan na MenuState
             this.currentState = new MenuState(this);

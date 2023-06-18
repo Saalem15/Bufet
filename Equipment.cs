@@ -9,5 +9,6 @@ namespace Gierka
     public abstract class Equipment
     {
         public string Name { get; set; }
+        public int Price { get; set; }
     }
 }

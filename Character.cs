@@ -25,19 +25,7 @@ namespace Gierka
             Attack = baseAttack;
         }
 
-        public void EquipArmor(Armor armor)
-        {
-            Armor = armor;
-            // Zwiększamy zdrowie o wartość zbroi
-            Health = BaseHealth + armor.HealthBoost;
-        }
 
-        public void EquipWeapon(Weapon weapon)
-        {
-            Weapon = weapon;
-            // Zwiększamy atak o wartość broni
-            Attack = BaseAttack + weapon.AttackBoost;
-        }
     }
 
 }

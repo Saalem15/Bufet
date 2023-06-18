@@ -43,7 +43,7 @@ namespace Gierka
                 // Tura gracza
                 Console.WriteLine();
                 Console.WriteLine();
-                Console.WriteLine("Twoja tura! Wybierz akcję: 1. Atak 2. Obrona 3. Ucieczka");
+                Console.WriteLine("Twoja tura! Wybierz akcję: 1. Atak 2. Ucieczka");
                 Console.WriteLine();
                 var key = Console.ReadKey();
                 if (key.KeyChar == '1')
@@ -54,7 +54,7 @@ namespace Gierka
                     Console.WriteLine($"{stateMachine.Player.Name} zaatakował {monster.Name}. Pozostałe zdrowie potwora: {monster.Health}");
                     Console.WriteLine();
                 }
-                else if (key.KeyChar == '3')
+                else if (key.KeyChar == '2')
                 {
                     Console.WriteLine();
                     Console.WriteLine("Uciekasz z walki. Wróć, kiedy będziesz gotowy.");
@@ -68,6 +68,26 @@ namespace Gierka
                     Console.WriteLine();
                     Console.WriteLine($"Pokonałeś potwora! Powrót do menu...");
                     Console.WriteLine();
+                    switch (monster.Name)
+                    {
+                        case "Goblin":
+                            stateMachine.Player.Gold += 10;
+                            Console.WriteLine("Otrzymałeś 10 złota");
+                            Console.WriteLine();
+                            break;
+                        case "Troll":
+                            stateMachine.Player.Gold += 20;
+                            Console.WriteLine("Otrzymałeś 20 złota");
+                            Console.WriteLine();
+                            break;
+                        case "Ork":
+                            stateMachine.Player.Gold += 30;
+                            Console.WriteLine("Otrzymałeś 30 złota");
+                            Console.WriteLine();
+                            break;
+                        default:
+                            throw new ArgumentException($"Nieznany typ potwora: {monster.Name}");
+                    }
                     stateMachine.ChangeState(new MenuState(stateMachine));
                     return true;
                 }
