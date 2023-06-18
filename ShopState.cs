@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,50 +18,53 @@ namespace Gierka
         {
             this.stateMachine = stateMachine;
 
-            // Inicjalizacja list przedmiotów do kupienia
-            armors = new List<Armor>()
-            {
-            new Armor("Lekka zbroja", 50, 10),
-            new Armor("Średnia zbroja", 100, 20),
-            new Armor("Ciężka zbroja", 200, 30)
-            };
+            armors = new List<Armor>
+        {
+            new Armor("Lekka zbroja", 100, 50),
+            new Armor("Średnia zbroja", 200, 100),
+            new Armor("Ciężka zbroja", 300, 150)
+        };
 
-            weapons = new List<Weapon>()
-            {
-            new Weapon("Miecz", 30, 15),
-            new Weapon("Topór", 70, 25),
-            new Weapon("Miecz dwuręczny", 120, 35)
-            };
+            weapons = new List<Weapon>
+        {
+            new Weapon("Miecz", 100, 50),
+            new Weapon("Topór", 200, 100),
+            new Weapon("Miecz dwuręczny", 300, 150)
+        };
         }
 
         public bool Process()
         {
-            while (true)
-            {
-                Console.WriteLine("1. Kup zbroję");
-                Console.WriteLine("2. Kup broń");
-                Console.WriteLine("3. Powrót do menu");
+            Console.WriteLine("Witaj w sklepie!");
+            Console.WriteLine("1. Kup zbroję");
+            Console.WriteLine("2. Kup broń");
+            Console.WriteLine("3. Kup miksturę zdrowia");
+            Console.WriteLine("4. Wróć do menu");
 
-                var pressedKey = Console.ReadKey();
-                switch (pressedKey.KeyChar)
-                {
-                    case '1':
-                        BuyArmor();
-                        break;
-                    case '2':
-                        BuyWeapon();
-                        break;
-                    case '3':
-                        stateMachine.ChangeState(new MenuState(stateMachine));
-                        return true;
-                    default:
-                        Console.WriteLine("Niepoprawna Komenda");
-                        break;
-                }
+            var choice = Console.ReadKey();
+
+            switch (choice.KeyChar)
+            {
+                case '1':
+                    BuyArmor();
+                    break;
+                case '2':
+                    BuyWeapon();
+                    break;
+                case '3':
+                    BuyPotion();
+                    break;
+                case '4':
+                    stateMachine.ChangeState(new MenuState(stateMachine));
+                    break;
+                default:
+                    Console.WriteLine("Niepoprawny wybór!");
+                    break;
             }
 
-
+            return true;
         }
+
         private void BuyArmor()
         {
             for (int i = 0; i < armors.Count; i++)
@@ -69,7 +73,6 @@ namespace Gierka
             }
 
             var choice = Console.ReadKey();
-
             int index = choice.KeyChar - '1';
 
             if (index >= 0 && index < armors.Count)
@@ -80,13 +83,7 @@ namespace Gierka
                     stateMachine.Player.Gold -= armors[index].Price;
 
                     // Usuń zakupioną zbroję i wszystkie tańsze
-                    for (int i = armors.Count - 1; i >= 0; i--)
-                    {
-                        if (armors[i].Price <= armors[index].Price)
-                        {
-                            armors.RemoveAt(i);
-                        }
-                    }
+                    armors = armors.Where(armor => armor.Price > armors[index].Price).ToList();
 
                     Console.WriteLine("Zakupiono zbroję!");
                 }
@@ -109,7 +106,6 @@ namespace Gierka
             }
 
             var choice = Console.ReadKey();
-
             int index = choice.KeyChar - '1';
 
             if (index >= 0 && index < weapons.Count)
@@ -120,13 +116,7 @@ namespace Gierka
                     stateMachine.Player.Gold -= weapons[index].Price;
 
                     // Usuń zakupioną broń i wszystkie tańsze
-                    for (int i = weapons.Count - 1; i >= 0; i--)
-                    {
-                        if (weapons[i].Price <= weapons[index].Price)
-                        {
-                            weapons.RemoveAt(i);
-                        }
-                    }
+                    weapons = weapons.Where(weapon => weapon.Price > weapons[index].Price).ToList();
 
                     Console.WriteLine("Zakupiono broń!");
                 }
@@ -141,5 +131,18 @@ namespace Gierka
             }
         }
 
+        private void BuyPotion()
+        {
+            if (stateMachine.Player.Gold >= 50)
+            {
+                stateMachine.Player.Gold -= 50;
+                stateMachine.Player.Potions += 1;
+            }
+            else
+            {
+                Console.WriteLine("Nie masz wystarczającej ilości złota!");
+            }
+        }
     }
+
 }

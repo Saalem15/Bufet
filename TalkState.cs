@@ -17,28 +17,29 @@ namespace Gierka
 
         public bool Process()
         {
-            // Tutaj dodajemy logikę rozmowy.
-            // Możesz zastąpić poniższe wiersze swoją własną logiką rozmowy.
-
-            Console.WriteLine("Rozpoczynasz rozmowę!");
-
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("[Bodzio]: Witaj, czego chcesz się dowiedzieć?");
+            Console.WriteLine();
             Console.WriteLine("1. Zapytaj o zadanie");
-            Console.WriteLine("2. Zapytaj o pogodę");
-            Console.WriteLine("3. Zakończ rozmowę");
+            Console.WriteLine("2. Zakończ rozmowę");
+            Console.WriteLine();
 
             var pressedKey = Console.ReadKey();
 
             switch (pressedKey.KeyChar)
             {
                 case '1':
-                    Console.WriteLine("Zadajesz pytanie o zadanie.");
-                    // Tutaj dodajesz logikę zadawania pytań o zadanie.
+                    Console.WriteLine();
+                    Console.WriteLine();
+                    Console.WriteLine("Co muszę jeszcze zrobić, aby móc wejść do jaskini smoka?");
+                    Console.WriteLine();
+                    Console.WriteLine("[Bodzio]:");
+                    stateMachine.MyQuest.UpdateQuest(stateMachine.Player.GoblinsKilled, stateMachine.Player.TrollsKilled, stateMachine.Player.OrcsKilled);
+                    Console.WriteLine();
+                    stateMachine.ChangeState(new MenuState(stateMachine));
                     break;
                 case '2':
-                    Console.WriteLine("Zadajesz pytanie o pogodę.");
-                    // Tutaj dodajesz logikę zadawania pytań o pogodę.
-                    break;
-                case '3':
                     Console.WriteLine("Kończysz rozmowę. Wróć do menu.");
                     stateMachine.ChangeState(new MenuState(stateMachine));
                     break;

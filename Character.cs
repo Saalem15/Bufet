@@ -15,6 +15,7 @@ namespace Gierka
         public int Attack { get; set; }
         public Armor Armor { get; set; }
         public Weapon Weapon { get; set; }
+        public int Potions { get; set; }
 
         public Character(string name, int baseHealth, int baseAttack)
         {

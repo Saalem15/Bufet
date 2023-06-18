@@ -18,13 +18,16 @@ namespace Gierka
             switch (monsterType)
             {
                 case "Goblin":
-                    monster = new Character("Goblin", 30, 10);
+                    monster = new Goblin();
                     break;
                 case "Troll":
-                    monster = new Character("Troll", 40, 20);
+                    monster = new Troll();
                     break;
                 case "Ork":
-                    monster = new Character("Ork", 50, 30);
+                    monster = new Orc();
+                    break;
+                case "Dragon":
+                    monster = new Dragon();
                     break;
                 default:
                     throw new ArgumentException($"Nieznany typ potwora: {monsterType}");
@@ -36,14 +39,12 @@ namespace Gierka
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine($"Walka zaczęła się! Walczysz z {monster.Name}");
-            Console.WriteLine();
 
             while (true)
             {
                 // Tura gracza
                 Console.WriteLine();
-                Console.WriteLine();
-                Console.WriteLine("Twoja tura! Wybierz akcję: 1. Atak 2. Ucieczka");
+                Console.WriteLine("Twoja tura! Wybierz akcję: 1. Atak 2. Ucieczka 3. Ulecz się");
                 Console.WriteLine();
                 var key = Console.ReadKey();
                 if (key.KeyChar == '1')
@@ -62,26 +63,43 @@ namespace Gierka
                     stateMachine.ChangeState(new MenuState(stateMachine));
                     return true;
                 }
+                else if (key.KeyChar == '3')
+                {
+                    if (stateMachine.Player.Potions >= 1)
+                    {
+                        stateMachine.Player.Health += 50;
+                        if (stateMachine.Player.Health > stateMachine.Player.BaseHealth)
+                        {
+                            stateMachine.Player.Health = stateMachine.Player.BaseHealth;
+                        }
+                        stateMachine.Player.Potions -= 1;
+                    }
+                 
+                }
 
                 if (monster.Health <= 0)
                 {
                     Console.WriteLine();
                     Console.WriteLine($"Pokonałeś potwora! Powrót do menu...");
                     Console.WriteLine();
+                    Console.WriteLine();
                     switch (monster.Name)
                     {
                         case "Goblin":
                             stateMachine.Player.Gold += 10;
+                            stateMachine.Player.GoblinsKilled += 1;
                             Console.WriteLine("Otrzymałeś 10 złota");
                             Console.WriteLine();
                             break;
                         case "Troll":
                             stateMachine.Player.Gold += 20;
+                            stateMachine.Player.TrollsKilled += 1;
                             Console.WriteLine("Otrzymałeś 20 złota");
                             Console.WriteLine();
                             break;
                         case "Ork":
                             stateMachine.Player.Gold += 30;
+                            stateMachine.Player.OrcsKilled += 1;
                             Console.WriteLine("Otrzymałeś 30 złota");
                             Console.WriteLine();
                             break;

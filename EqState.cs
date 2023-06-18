@@ -17,10 +17,10 @@ namespace Gierka
         }
 
         public bool Process()
-        {
-            bool keepRunning = true;
-            while (keepRunning)
+        { 
+            while (true)
             {
+                Console.WriteLine();
                 Console.WriteLine("1. Sprawdź ilość pieniędzy");
                 Console.WriteLine("2. Sprawdź zbroje");
                 Console.WriteLine("3. Sprawdź broń");
@@ -39,14 +39,14 @@ namespace Gierka
                         Console.WriteLine($"Twoja broń: {stateMachine.Player.Weapon.Name}, Atak: {stateMachine.Player.Weapon.AttackBoost}");
                         break;
                     case '4':
-                        keepRunning = false;
-                        break;
+                        stateMachine.ChangeState(new MenuState(stateMachine));
+                        return true;
                     default:
                         Console.WriteLine("Niepoprawna Komenda");
                         break;
                 }
             }
-            return true;
+            
         }
     }
 }

@@ -21,10 +21,10 @@ namespace Gierka
             while (selectedOption is false)
             {
                 Console.WriteLine("1. Walka");
-                Console.WriteLine("2. Gadanie");
+                Console.WriteLine("2. Bodzio");
                 Console.WriteLine("3. Sklep");
-                Console.WriteLine("4. Plecak/EQ");
-                Console.WriteLine("5. Chleb");
+                Console.WriteLine("4. Plecak");
+                Console.WriteLine("5. Jaskinia");
                 Console.WriteLine("9. Wyłącz Gre");
                 Console.WriteLine();
 
@@ -52,7 +52,7 @@ namespace Gierka
                         break;
                     case '5':
                         //bread
-                        stateMachine.ChangeState(new BreadState(stateMachine));
+                        stateMachine.ChangeState(new BossState(stateMachine));
                         selectedOption = true;
                         break;
                     case '9':
